@@ -11,7 +11,7 @@ mergeInto(LibraryManager.library, {
     if (window.walletAdapterLib == undefined) {
       var script = document.createElement("script");
       script.src =
-        "https://cdn.jsdelivr.net/npm/@magicblock-labs/unity-wallet-adapter@1.2.1";
+        "https://cdn.jsdelivr.net/npm/@magicblock-labs/unity-wallet-adapter@1.2.1?v="+Math.random();
       document.head.appendChild(script);
       script.onload = function () {
         Module.dynCall_vi(callback, isXnft);
