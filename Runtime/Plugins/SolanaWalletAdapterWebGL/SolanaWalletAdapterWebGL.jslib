@@ -8,16 +8,17 @@ mergeInto(LibraryManager.library, {
     );
     window.rpcCluster = UTF8ToString(rpcClusterPtr);
     // Add UnityWalletAdapter from CDN
-    var existingScript = document.getElementById('uniqueScriptId');
-    if (window.walletAdapterLib == undefined && !existingScript) {
-      var script = document.createElement("script");
-      script.id = 'uniqueScriptId';
-      script.src =
-        "https://cdn.jsdelivr.net/npm/@magicblock-labs/unity-wallet-adapter@1.2.1?v="+Math.random();
-      document.head.appendChild(script);
-      script.onload = function () {
-        Module.dynCall_vi(callback, isXnft);
-      };
+    if (window.walletAdapterLib == undefined) {
+      var existingScript = document.getElementById('uniqueScriptId');
+      if(!existingScript){
+        var script = document.createElement("script");
+        script.id = 'uniqueScriptId';
+        script.src ="https://cdn.jsdelivr.net/npm/@magicblock-labs/unity-wallet-adapter@1.2.1?v="+Math.random();
+        document.head.appendChild(script);
+        script.onload = function () {
+          Module.dynCall_vi(callback, isXnft);
+        };
+      }
     } else {
       window.walletAdapterLib.refreshWalletAdapters();
       Module.dynCall_vi(callback, isXnft);
